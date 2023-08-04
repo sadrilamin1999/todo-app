@@ -22,7 +22,7 @@ const createTodo = (todoId, todoValue) => {
   todoElement.classList.add("li-style");
   todoElement.innerHTML = `
   <span>${todoValue}</span>
-  <sapn><button class="btn" id="deleteButton" >Delet</button></sapn>
+  <sapn><button class="btn" id="deleteButton" >Delete</button></sapn>
   `;
   todoLists.appendChild(todoElement);
 
@@ -35,6 +35,10 @@ const deleteTodo = (event) => {
   const selectedTodo = event.target.parentElement.parentElement;
   todoLists.removeChild(selectedTodo);
   showMessage("Todo is deleted ❌", "danger");
+
+  let todos = getTodosFromLocalStroge();
+  todos = todos.filter((todo) => todo.todoId !== selectedTodo.id);
+  localStorage.setItem("mytodos", JSON.stringify(todos));
 };
 
 // get todos from local stroge
