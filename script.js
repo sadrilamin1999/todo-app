@@ -25,7 +25,18 @@ const createTodo = (todoId, todoValue) => {
   <sapn><button class="btn" id="deleteButton" >Delet</button></sapn>
   `;
   todoLists.appendChild(todoElement);
+
+  const deleteButton = todoElement.querySelector("#deleteButton");
+  deleteButton.addEventListener("click", deleteTodo);
 };
+
+// delete todo
+const deleteTodo = (event) => {
+  const selectedTodo = event.target.parentElement.parentElement;
+  todoLists.removeChild(selectedTodo);
+  showMessage("Todo is deleted ❌", "danger");
+};
+
 // get todos from local stroge
 const getTodosFromLocalStroge = () => {
   return localStorage.getItem("mytodos")
